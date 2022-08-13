@@ -2,7 +2,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MSB implements SteganographyImageText{
+public class MSB {
 
     PixelImage image;
 
@@ -10,7 +10,7 @@ public class MSB implements SteganographyImageText{
         this.image = image;
     }
 
-    @Override
+
     public void decode(String code) throws Exception {
         byte[] codeBytes = code.getBytes(StandardCharsets.UTF_8);
         if (image.getNumberOfPixel() * 3 < codeBytes.length * 4 + 4)
@@ -87,7 +87,7 @@ public class MSB implements SteganographyImageText{
 
     }
 
-    @Override
+
     public String encode(PixelImage rawImage) {
         int width = rawImage.getWidth();
         int height = rawImage.getHeight();
@@ -153,22 +153,18 @@ public class MSB implements SteganographyImageText{
         return result.substring(0,i);
     }
 
-    @Override
     public  void DESEncrypt(String code,String secretKey) throws Exception {
         decode(Encryption.DESEncrypt(code,secretKey));
     }
-    @Override
 
     public  void AESEncrypt(String code,String secretKey) throws Exception {
         decode(Encryption.AESEncrypt(code,secretKey));
     }
-    @Override
 
     public  String DESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
 
         return Encryption.DESDecrypt(encode(rawImage),secretKey);
     }
-    @Override
 
     public String AESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
 

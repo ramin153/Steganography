@@ -2,7 +2,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LSBEnhance implements SteganographyImageText {
+public class LSBEnhance  {
 
     private PixelImage image;
 
@@ -10,7 +10,7 @@ public class LSBEnhance implements SteganographyImageText {
         this.image = image;
     }
 
-    @Override
+
     public void decode(String code) throws Exception {
 
         byte[] codeBytes = code.getBytes(StandardCharsets.UTF_8);
@@ -76,7 +76,7 @@ public class LSBEnhance implements SteganographyImageText {
         return ((num>>7)&1) ^ ((num>>6)&1) ^ ((num>>5)&1);
     }
 
-    @Override
+
     public String encode(PixelImage rawImage) {
         int width = rawImage.getWidth();
         int height = rawImage.getHeight();

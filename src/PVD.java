@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PVD implements SteganographyImageText{
+public class PVD {
 
     //regions until 15 difference we consider lower band and upper band difference only one bit so we can't hide anything
     //from 16 util 31 we consider 2 bit -> 16-17,18-19,.....
@@ -16,7 +16,7 @@ public class PVD implements SteganographyImageText{
         this.image = image;
     }
 
-    @Override
+
     public void decode(String code) throws Exception {
         byte[] codeBytes = code.getBytes(StandardCharsets.UTF_8);
         int bitNumber = 0;
@@ -175,8 +175,8 @@ public class PVD implements SteganographyImageText{
         return new int[]{lowerBand,upperBan};
     }
 
-    @Override
-    public String encode(PixelImage rawImage) {
+
+    public String encode() {
 
         List<Byte> bytesCode = new ArrayList<>();
         byte byteCode = 0;
@@ -313,27 +313,24 @@ public class PVD implements SteganographyImageText{
 
     }
 
-    @Override
     public  void DESEncrypt(String code,String secretKey) throws Exception {
         decode(Encryption.DESEncrypt(code,secretKey));
     }
-    @Override
 
     public  void AESEncrypt(String code,String secretKey) throws Exception {
 
         decode(Encryption.AESEncrypt(code,secretKey));
     }
-    @Override
 
-    public  String DESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
+    public  String DESDecrypt(String secretKey) throws Exception {
 
-        return Encryption.DESDecrypt(encode(rawImage),secretKey);
+        return Encryption.DESDecrypt(encode(),secretKey);
     }
-    @Override
 
-    public String AESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
 
-        return Encryption.AESDecrypt(encode(rawImage),secretKey);
+    public String AESDecrypt(String secretKey) throws Exception {
+
+        return Encryption.AESDecrypt(encode(),secretKey);
     }
 
     public static void main(String[] args) throws Exception {

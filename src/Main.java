@@ -2,16 +2,20 @@ public class Main {
     private static final String mySecretKey = "klasdjfakflsjdalkfdj";
     public static void main(String[] args) throws Exception {
 
-//        AESDecode("i care you 2","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(AESEncode("C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop\\AES-test.png"));
+
+
+//        LSBDecode("fuck","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        "C:\\Users\\ramin\\Desktop");
+//        System.out.println(LSBEncode("C:\\Users\\ramin\\Desktop\\LSB-test.png"));
 //
-//        DESDecode("i want to kill you 2","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
 //
-//        System.out.println(DESEncode("C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//        "C:\\Users\\ramin\\Desktop\\DES-test.png"));
+//        AESDecode("i care you 333","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//                "C:\\Users\\ramin\\Desktop");
+//        System.out.println(AESEncode("C:\\Users\\ramin\\Desktop\\LSB-AES-test.png"));
+//
+//        DESDecode("i want to kill you 555","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//                "C:\\Users\\ramin\\Desktop");
+//        System.out.println(DESEncode("C:\\Users\\ramin\\Desktop\\LSB-DES-test.png"));
 
 //        LSBEnhanceDecode("i want to die 5","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
 //        "C:\\Users\\ramin\\Desktop");
@@ -53,20 +57,42 @@ public class Main {
 
 //        PVDDecode("my name is dark lord","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(PVDEncode("C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        System.out.println(PVDEncode(
 //                "C:\\Users\\ramin\\Desktop\\PVD-test.png"));
 //
 //
 
 //        PVDAESDecode("i care you but no much ","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(PVDAESEncode("C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        System.out.println(PVDAESEncode(
 //                "C:\\Users\\ramin\\Desktop\\PVD-AES-test.png"));
 //
 //        PVDDESDecode("i want to kill you 2 PVD 11","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(PVDDESEncode("C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        System.out.println(PVDDESEncode(
 //        "C:\\Users\\ramin\\Desktop\\PVD-DES-test.png"));
+
+
+
+
+        RPEDecode("my name is dark lord 2323","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+                "C:\\Users\\ramin\\Desktop",1234);
+        System.out.println(RPEEncode(
+                "C:\\Users\\ramin\\Desktop\\RPE-test.png",1234));
+
+
+
+        RPEAESDecode("i care you but no much 999","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+                "C:\\Users\\ramin\\Desktop",1234);
+        System.out.println(RPEAESEncode(
+                "C:\\Users\\ramin\\Desktop\\RPE-AES-test.png",1234));
+
+        RPEDESDecode("i want to kill you 2 RPE 11","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+                "C:\\Users\\ramin\\Desktop",1234);
+        System.out.println(RPEDESEncode(
+        "C:\\Users\\ramin\\Desktop\\RPE-DES-test.png",1234));
+
+
 
 
     }
@@ -85,32 +111,44 @@ public class Main {
         return new LSBEnhance(image).encode( raw);
     }
 
-    private static void AESDecode(String code,String location,String saveLocation) throws Exception{
+    private static void LSBDecode(String code, String location, String saveLocation) throws Exception{
         PixelImage image = new PixelImage(location);
-        new LSB(image).AESEncrypt(code,mySecretKey);
-        image.writeImage("AES-test","png",saveLocation);
-
+        new LSB(image).decode(code);
+        image.writeImage("LSB-test","png",saveLocation);
     }
-    private static String AESEncode(String rawLocation,String decodeLocation) throws Exception{
-        PixelImage raw = new PixelImage(rawLocation);
+
+    private static String LSBEncode(String decodeLocation) throws Exception{
         PixelImage image = new PixelImage(decodeLocation);
 
 
-         return new LSB (image).AESDecrypt( raw,mySecretKey);
+        return new LSB(image).encode( );
+    }
+
+
+    private static void AESDecode(String code,String location,String saveLocation) throws Exception{
+        PixelImage image = new PixelImage(location);
+        new LSB(image).AESEncrypt(code,mySecretKey);
+        image.writeImage("LSB-AES-test","png",saveLocation);
+
+    }
+    private static String AESEncode(String decodeLocation) throws Exception{
+        PixelImage image = new PixelImage(decodeLocation);
+
+
+         return new LSB (image).AESDecrypt( mySecretKey);
     }
 
     private static void DESDecode(String code,String location,String saveLocation) throws Exception{
         PixelImage image = new PixelImage(location);
         new LSB(image).DESEncrypt(code,mySecretKey);
-        image.writeImage("DES-test","png",saveLocation);
+        image.writeImage("LSB-DES-test","png",saveLocation);
 
     }
-    private static String DESEncode(String rawLocation,String decodeLocation) throws Exception{
-        PixelImage raw = new PixelImage(rawLocation);
+    private static String DESEncode(String decodeLocation) throws Exception{
         PixelImage image = new PixelImage(decodeLocation);
 
 
-        return new LSB(image).DESDecrypt( raw,mySecretKey);
+        return new LSB(image).DESDecrypt( mySecretKey);
     }
 
 
@@ -194,11 +232,11 @@ public class Main {
         image.writeImage("PVD-test","png",saveLocation);
     }
 
-    private static String PVDEncode(String rawLocation,String decodeLocation) throws Exception{
+    private static String PVDEncode(String decodeLocation) throws Exception{
         PixelImage image = new PixelImage(decodeLocation);
 
 
-        return new PVD(image).encode(null);
+        return new PVD(image).encode();
     }
 
 
@@ -209,11 +247,11 @@ public class Main {
         image.writeImage("PVD-AES-test","png",saveLocation);
 
     }
-    private static String PVDAESEncode(String rawLocation, String decodeLocation) throws Exception{
+    private static String PVDAESEncode( String decodeLocation) throws Exception{
         PixelImage image = new PixelImage(decodeLocation);
 
 
-        return new PVD(image).AESDecrypt( null,mySecretKey);
+        return new PVD(image).AESDecrypt( mySecretKey);
     }
 
     private static void PVDDESDecode(String code, String location, String saveLocation) throws Exception{
@@ -222,11 +260,56 @@ public class Main {
         image.writeImage("PVD-DES-test","png",saveLocation);
 
     }
-    private static String PVDDESEncode(String rawLocation, String decodeLocation) throws Exception{
+    private static String PVDDESEncode( String decodeLocation) throws Exception{
         PixelImage image = new PixelImage(decodeLocation);
 
 
-        return new PVD(image).DESDecrypt( null,mySecretKey);
+        return new PVD(image).DESDecrypt( mySecretKey);
+    }
+
+
+    private static void RPEDecode(String code, String location, String saveLocation,int seed) throws Exception{
+        PixelImage image = new PixelImage(location);
+
+        new RandomPixelEmbedding(image).decode(code,seed);
+        image.writeImage("RPE-test","png",saveLocation);
+
+
+    }
+
+    private static String RPEEncode(String decodeLocation,int seed) throws Exception{
+        PixelImage image = new PixelImage(decodeLocation);
+
+
+        return new RandomPixelEmbedding(image).encode(seed);
+    }
+
+
+
+    private static void RPEAESDecode(String code, String location, String saveLocation,int seed) throws Exception{
+        PixelImage image = new PixelImage(location);
+        new RandomPixelEmbedding(image).AESEncrypt(code,mySecretKey,seed);
+        image.writeImage("RPE-AES-test","png",saveLocation);
+
+    }
+    private static String RPEAESEncode( String decodeLocation,int seed) throws Exception{
+        PixelImage image = new PixelImage(decodeLocation);
+
+
+        return new RandomPixelEmbedding(image).AESDecrypt( mySecretKey,seed);
+    }
+
+    private static void RPEDESDecode(String code, String location, String saveLocation,int seed) throws Exception{
+        PixelImage image = new PixelImage(location);
+        new RandomPixelEmbedding(image).DESEncrypt(code,mySecretKey,seed);
+        image.writeImage("RPE-DES-test","png",saveLocation);
+
+    }
+    private static String RPEDESEncode( String decodeLocation,int seed) throws Exception{
+        PixelImage image = new PixelImage(decodeLocation);
+
+
+        return new RandomPixelEmbedding(image).DESDecrypt( mySecretKey,seed);
     }
 
 }
