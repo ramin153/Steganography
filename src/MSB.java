@@ -1,5 +1,6 @@
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MSB {
@@ -13,7 +14,11 @@ public class MSB {
 
     public void decode(String code) throws Exception {
         byte[] codeBytes = code.getBytes(StandardCharsets.UTF_8);
-        if (image.getNumberOfPixel() * 3 < codeBytes.length * 4 + 4)
+        codeBytes = Arrays.copyOf(codeBytes,codeBytes.length+2);
+        codeBytes[codeBytes.length-1]=0;
+        codeBytes[codeBytes.length-2]=0;
+
+        if (image.getNumberOfPixel() * 3 < codeBytes.length * 8 + 8)
             throw new Exception("we need more pixel for handling this text");
 
         int pixelNumber = 0;
@@ -45,13 +50,13 @@ public class MSB {
         int heightPos = pixelNumber/ image.getWidth();
 
         int selectBit = (byteCode >> i) & 1;
-
         switch (pixelNumberRGB %3)
         {
+
             case 0 ->{
                 int pixelRed = image.getRedPixelColor(heightPos,widthPos);
                 int xorSign = getXorBit56(pixelRed);
-                int xorSingAndValue = (((xorSign) ^ (selectBit))&1 ) << 5;
+                int xorSingAndValue = (((xorSign) == ((selectBit)&1))?0:1)  << 4;
 
                 image.setRedPixelColor(heightPos,widthPos,
                         (pixelRed ) ^ xorSingAndValue
@@ -61,17 +66,17 @@ public class MSB {
             case 1 ->{
                 int pixelGreen = image.getGreenPixelColor(heightPos,widthPos);
                 int xorSign = getXorBit56(pixelGreen);
-                int xorSingAndValue = (((xorSign) ^ (selectBit))&1 ) << 5;
+                int xorSingAndValue = (((xorSign) == ((selectBit)&1))?0:1)  << 4;
+
                 image.setGreenPixelColor(heightPos,widthPos,
-                        (pixelGreen ) ^ xorSingAndValue
-                );
+                        (pixelGreen ) ^ xorSingAndValue);
             }
 
             default ->{
                 int pixelBlue = image.getBluePixelColor(heightPos,widthPos);
                 int xorSign = getXorBit56(pixelBlue);
+                int xorSingAndValue = (((xorSign) == ((selectBit)&1))?0:1)  << 4;
 
-                int xorSingAndValue = (((xorSign) ^ (selectBit))&1 ) << 5;
                 image.setBluePixelColor(heightPos,widthPos,
                         (pixelBlue ) ^ xorSingAndValue
                 );
@@ -83,14 +88,14 @@ public class MSB {
     }
 
     private int getXorBit56(int num) {
-        return  ((num>>6)&1) ^ ((num>>5)&1);
+        return  ((num>>5)&1) ^ ((num>>4)&1);
 
     }
 
 
-    public String encode(PixelImage rawImage) {
-        int width = rawImage.getWidth();
-        int height = rawImage.getHeight();
+    public String encode() {
+        int width = image.getWidth();
+        int height = image.getHeight();
         int pixelRGBCount = 0;
         List<Byte> codeBytes = new ArrayList<>();
         byte byteCode = 0;
@@ -106,22 +111,19 @@ public class MSB {
 
                     switch (pixelRGBCount % 3) {
                         case 0 -> {
-                            int secretBit = ((image.getRedPixelColor(h, w) ^ rawImage.getRedPixelColor(h, w)) >> 5) ^
-                                    getXorBit56(rawImage.getRedPixelColor(h, w));
+                            int secretBit = getXorBit56(image.getRedPixelColor(h, w));
 
                             byteCode += (byte) (secretBit) << (posInRGBPixel);
                         }
 
                         case 1 -> {
-                            int secretBit = ((image.getGreenPixelColor(h, w) ^ rawImage.getGreenPixelColor(h, w)) >> 5) ^
-                                    getXorBit56(rawImage.getGreenPixelColor(h, w));
+                            int secretBit =  getXorBit56(image.getGreenPixelColor(h, w));
                             byteCode += (byte) (secretBit) << (posInRGBPixel);
                         }
 
                         default -> {
 
-                            int secretBit = ((image.getBluePixelColor(h, w) ^ rawImage.getBluePixelColor(h, w)) >> 5) ^
-                                    getXorBit56(rawImage.getBluePixelColor(h, w));
+                            int secretBit =  getXorBit56(image.getBluePixelColor(h, w));
                             byteCode += (byte) (secretBit) << (posInRGBPixel);
                         }
                     }
@@ -161,13 +163,13 @@ public class MSB {
         decode(Encryption.AESEncrypt(code,secretKey));
     }
 
-    public  String DESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
+    public  String DESDecrypt(String secretKey) throws Exception {
 
-        return Encryption.DESDecrypt(encode(rawImage),secretKey);
+        return Encryption.DESDecrypt(encode(),secretKey);
     }
 
-    public String AESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
+    public String AESDecrypt(String secretKey) throws Exception {
 
-        return Encryption.AESDecrypt(encode(rawImage),secretKey);
+        return Encryption.AESDecrypt(encode(),secretKey);
     }
 }

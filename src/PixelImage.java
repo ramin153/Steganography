@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,7 +18,11 @@ public class PixelImage {
         this.img = img;
     }
 
-    public void writeImage(String name,String format,String path) throws IOException {
+    public BufferedImage getImg() {
+        return img;
+    }
+
+    public void writeImage(String name, String format, String path) throws IOException {
         File outputfile = new File(path+"\\"+name+"."+format);
         ImageIO.write(img, format, outputfile);
     }
@@ -78,6 +84,13 @@ public class PixelImage {
         return "red :"+ getRedPixelColor(height,width)+"  green:"+getGreenPixelColor(height,width)+"  blue:"+getBluePixelColor(height,width);
     }
 
+
+    public PixelImage deepCopy() {
+        ColorModel cm = img.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = img.copyData(null);
+        return new PixelImage(new BufferedImage(cm, raster, isAlphaPremultiplied, null));
+    }
 
     public void printImage(){
         for (int y = 0; y < getHeight(); y++){

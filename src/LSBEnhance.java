@@ -1,5 +1,6 @@
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LSBEnhance  {
@@ -14,6 +15,10 @@ public class LSBEnhance  {
     public void decode(String code) throws Exception {
 
         byte[] codeBytes = code.getBytes(StandardCharsets.UTF_8);
+        codeBytes = Arrays.copyOf(codeBytes,codeBytes.length+2);
+        codeBytes[codeBytes.length-1]=0;
+        codeBytes[codeBytes.length-2]=0;
+
         if (image.getNumberOfPixel() * 3 < codeBytes.length * 8 + 8)
             throw new Exception("we need more pixel for handling this text");
 
@@ -37,29 +42,31 @@ public class LSBEnhance  {
             {
                 case 0 ->{
                     int pixelRed = image.getRedPixelColor(heightPos,widthPos);
-                    int xorSign = getXorThreeSingBit(pixelRed);
-
+                    int xorSign = getXorThreeSingBit(pixelRed) ^ (1 & pixelRed);
+                    int xorSingAndValue = (((xorSign) == ((selectBit)&1))?0:1);
                     image.setRedPixelColor(heightPos,widthPos,
-                            (pixelRed ) ^ (xorSign) ^ (selectBit)
+                            (pixelRed ) ^ xorSingAndValue
                             );
                 }
 
                 case 1 ->{
                     int pixelGreen = image.getGreenPixelColor(heightPos,widthPos);
-                    int xorSign = getXorThreeSingBit(pixelGreen);
+                    int xorSign = getXorThreeSingBit(pixelGreen) ^ (1 & pixelGreen);
+                    int xorSingAndValue = (((xorSign) == ((selectBit)&1))?0:1);
 
                     image.setGreenPixelColor(heightPos,widthPos,
-                            (pixelGreen ) ^ (xorSign) ^ (selectBit)
+                            (pixelGreen ) ^ xorSingAndValue
                     );
                 }
 
                 default ->{
                     int pixelBlue = image.getBluePixelColor(heightPos,widthPos);
-                    int xorSign = getXorThreeSingBit(pixelBlue);
+                    int xorSign = getXorThreeSingBit(pixelBlue) ^ (1 & pixelBlue);
+                    int xorSingAndValue = (((xorSign) == ((selectBit)&1))?0:1);
 
 
                     image.setBluePixelColor(heightPos,widthPos,
-                            (pixelBlue ) ^ (xorSign) ^ (selectBit)
+                            (pixelBlue ) ^ xorSingAndValue
                     );
                 }
 
@@ -77,9 +84,9 @@ public class LSBEnhance  {
     }
 
 
-    public String encode(PixelImage rawImage) {
-        int width = rawImage.getWidth();
-        int height = rawImage.getHeight();
+    public String encode() {
+        int width = image.getWidth();
+        int height = image.getHeight();
         int pixelRGBCount = 0;
         List<Byte> codeBytes = new ArrayList<>();
         byte byteCode = 0;
@@ -97,27 +104,21 @@ public class LSBEnhance  {
                         case 0 -> {
                             int pixelRed = image.getRedPixelColor(h,w);
                             int xorSign = getXorThreeSingBit(pixelRed);
-                            byteCode +=
-                                    (byte) ((image.getRedPixelColor(h, w) ^ rawImage.getRedPixelColor(h, w) ^ (xorSign))
-                                            << (posInRGBPixel));
+                            byteCode += (xorSign ^(pixelRed&1)) << (posInRGBPixel);
                         }
 
                         case 1 -> {
                             int pixelGreen = image.getGreenPixelColor(h,w);
                             int xorSign = getXorThreeSingBit(pixelGreen);
 
-                            byteCode +=
-                                    (byte) ((image.getGreenPixelColor(h, w) ^ rawImage.getGreenPixelColor(h, w) ^ (xorSign))
-                                            << (posInRGBPixel ));
+                            byteCode += (xorSign ^(pixelGreen&1)) << (posInRGBPixel);
                         }
 
                         default -> {
                             int pixelBlue = image.getBluePixelColor(h,w);
                             int xorSign = getXorThreeSingBit(pixelBlue);
 
-                            byteCode +=
-                                    (byte) ((image.getBluePixelColor(h, w) ^ rawImage.getBluePixelColor(h, w)^(xorSign))
-                                            << (posInRGBPixel ));
+                            byteCode += (xorSign ^(pixelBlue&1)) << (posInRGBPixel);
                         }
                     }
 
@@ -156,11 +157,11 @@ public class LSBEnhance  {
         decode(Encryption.AESEncrypt(code,secretKey));
     }
 
-    public  String DESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
+    public  String DESDecrypt(String secretKey) throws Exception {
 
-        return Encryption.DESDecrypt(encode(rawImage),secretKey);
+        return Encryption.DESDecrypt(encode(),secretKey);
     }
-    public String AESDecrypt(PixelImage rawImage,String secretKey) throws Exception {
-        return Encryption.AESDecrypt(encode(rawImage),secretKey);
+    public String AESDecrypt(String secretKey) throws Exception {
+        return Encryption.AESDecrypt(encode(),secretKey);
     }
 }

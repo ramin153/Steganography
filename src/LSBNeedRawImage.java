@@ -1,18 +1,12 @@
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
-public class LSBXor {
+public class LSBNeedRawImage {
 
     private PixelImage image;
 
-    public LSBXor(PixelImage image) {
+    public LSBNeedRawImage(PixelImage image) {
         this.image = image;
     }
 
