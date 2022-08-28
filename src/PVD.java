@@ -15,13 +15,18 @@ public class PVD {
     public PVD(PixelImage image) {
         this.image = image;
     }
-
+    static byte[] save;
 
     public void decode(String code) throws Exception {
         byte[] codeBytes = code.getBytes(StandardCharsets.UTF_8);
         int bitNumber = 0;
+        codeBytes = Arrays.copyOf(codeBytes,codeBytes.length+2);
+        codeBytes[codeBytes.length-1]=0;
+        codeBytes[codeBytes.length-2]=0;
 
 
+
+        save = codeBytes;
         int i;
 
         for ( i = 0; (bitNumber / 8) < codeBytes.length  && i < (image.getNumberOfPixel()) - 1;i+=2){
@@ -35,6 +40,7 @@ public class PVD {
             pixelChangeColor(makeRestZero, 0, i);
 
         }
+
 
         if ((bitNumber / 8) < codeBytes.length)
             throw new Exception("we can not save all the text in image");
@@ -53,6 +59,7 @@ public class PVD {
 
             bitNumber = result[2];
         }catch (Exception ignored){
+            image.setRedPixelColor((selectPixel +1)/width,(selectPixel +1)%width,pixelOne);
         }
 
 
@@ -68,7 +75,7 @@ public class PVD {
 
             bitNumber = result[2];
         }catch (Exception ignored){
-
+            image.setGreenPixelColor((selectPixel +1)/width,(selectPixel +1)%width,pixelOne);
         }
 
 
@@ -87,7 +94,7 @@ public class PVD {
             bitNumber = result[2];
 
         }catch (Exception ignored){
-
+            image.setBluePixelColor((selectPixel +1)/width,(selectPixel +1)%width,pixelOne);
         }
 
 
@@ -96,7 +103,7 @@ public class PVD {
 
 
     private static int[] calculateNewPixel(int pixelOne,int pixelTwo,byte[] secreteByte,int numberBitPixel) throws Exception {
-
+        int help = numberBitPixel;
         int difference = Math.abs(pixelOne-pixelTwo);
         int[] lowAndUp =calculateUpLowerBand(difference);
         int lowerBand = lowAndUp[0];
@@ -120,8 +127,12 @@ public class PVD {
         int[] newPixel = getNewPixelValueBaseOnDifference(pixelOne, pixelTwo, difference, differenceNew);
 
 
-        if (newPixel[0] < 0 || newPixel[1] <0)
+        if (newPixel[0] < 0 || newPixel[1] <0 || newPixel[0] > 255 ||newPixel[1] > 255){
+
             throw new Exception("it can not applied");
+
+        }
+
         int[] result = Arrays.copyOf(newPixel,3);
         result[2] = numberBitPixel;
         return result;
@@ -238,6 +249,7 @@ public class PVD {
 
     private static Object[] calculateSecretValue(int colorOne,int colorTwo,int bitNumber,byte byteCode,List<Byte> bytesCode)
     {
+        int help = bitNumber + bytesCode.size()*8;
         int[] secretCodeAndBits ;
         try {
             secretCodeAndBits = getSecretTwoPixel(colorOne,colorTwo);
@@ -248,9 +260,11 @@ public class PVD {
         int secretValue = secretCodeAndBits[0];
 
         int numBitInSecretValue = secretCodeAndBits[1];
+
         if (numBitInSecretValue + bitNumber < 8){
             bitNumber += numBitInSecretValue;
             byteCode = (byte) (((byte)(byteCode << numBitInSecretValue)) + ((byte) secretValue));
+
         }else {
             int numberBitCanAddNow = numBitInSecretValue - ((numBitInSecretValue+bitNumber)%8);
 
@@ -259,9 +273,11 @@ public class PVD {
                             8 - (numBitInSecretValue - numberBitCanAddNow)) >> (numBitInSecretValue - numberBitCanAddNow)))   );
             bytesCode.add(byteCode);
 
-            byteCode =  getPartOfByte((byte) secretValue , numBitInSecretValue-numBitInSecretValue - numberBitCanAddNow);
+            byteCode =  getPartOfByte((byte) secretValue , numBitInSecretValue - numberBitCanAddNow);
+
             bitNumber = numBitInSecretValue - numberBitCanAddNow;
         }
+
         return new Object[]{bitNumber,byteCode};
     }
 
@@ -318,8 +334,9 @@ public class PVD {
     }
 
     public  void AESEncrypt(String code,String secretKey) throws Exception {
+        String text = Encryption.AESEncrypt(code,secretKey);
 
-        decode(Encryption.AESEncrypt(code,secretKey));
+        decode(text);
     }
 
     public  String DESDecrypt(String secretKey) throws Exception {
@@ -329,16 +346,10 @@ public class PVD {
 
 
     public String AESDecrypt(String secretKey) throws Exception {
+        String text = encode();
 
-        return Encryption.AESDecrypt(encode(),secretKey);
+        return Encryption.AESDecrypt(text,secretKey);
     }
 
-    public static void main(String[] args) throws Exception {
 
-        int pixelOne = 30,pixelTwo = 70;
-        List<Byte> bytes = new ArrayList<>();
-        int[] input = calculateNewPixel(pixelOne,pixelTwo,new byte[]{ (byte) 0,(byte)0},0);
-        System.out.println(Arrays.toString(input));
-        System.out.println(Arrays.toString(getSecretTwoPixel(input[0],input[1])));
-    }
 }

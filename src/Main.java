@@ -8,192 +8,180 @@ public class Main {
     private static final String mySecretKey = "klasdjfakflsjdalkfdj";
     public static void main(String[] args) throws Exception {
 
+         String file = "C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\file.txt";
+         String secretText = readFile(file);
+         String message;
+
+        String file2 = "C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\file2.txt";
+        String secretText2 = readFile(file2);
 
 
-//        LSBDecode("fuck","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+
+//        LSBDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //        "C:\\Users\\ramin\\Desktop");
-//        System.out.println(LSBEncode("C:\\Users\\ramin\\Desktop\\LSB-test.png"));
+//        message = LSBEncode("C:\\Users\\ramin\\Desktop\\LSB-test.png");
+//        writeFile(file+"message.txt",message);
 //
-//
-//        AESDecode("i care you 333","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        AESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(AESEncode("C:\\Users\\ramin\\Desktop\\LSB-AES-test.png"));
+//        message = AESEncode("C:\\Users\\ramin\\Desktop\\LSB-AES-test.png");
+//        writeFile(file+"message-ase.txt",message);
 //
-//        DESDecode("i want to kill you 555","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        DESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(DESEncode("C:\\Users\\ramin\\Desktop\\LSB-DES-test.png"));
+//        message = DESEncode("C:\\Users\\ramin\\Desktop\\LSB-DES-test.png");
+//        writeFile(file+"message-DSE.txt",message);
 
-//        LSBEnhanceDecode("i want to die 5555","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+
+//        LSBEnhanceDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //        "C:\\Users\\ramin\\Desktop");
 //
-//        System.out.println(LSBEnhanceEncode(
-//        "C:\\Users\\ramin\\Desktop\\LSB-en-test.png"));
+//        message = LSBEnhanceEncode(
+//        "C:\\Users\\ramin\\Desktop\\LSB-en-test.png");
+//        writeFile(file+"message.txt",message);
 //
-//        LSBEnhanceAESDecode("i care you but no much mmm","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//
+//        LSBEnhanceAESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(LSBEnhanceAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\LSB-en-AES-test.png"));
+//        message = LSBEnhanceAESEncode(
+//                "C:\\Users\\ramin\\Desktop\\LSB-en-AES-test.png");
+//        writeFile(file+"message-ase.txt",message);
 //
-//        LSBEnhanceDESDecode("i want to kill you 2 MSB 1234","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//
+//        LSBEnhanceDESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
+//        message = LSBEnhanceDESEncode(
+//        "C:\\Users\\ramin\\Desktop\\LSB-en-DES-test.png");
+//        writeFile(file+"message-DSE.txt",message);
 //
-//        System.out.println(LSBEnhanceDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\LSB-en-DES-test.png"));
 
 
-
-
-//        MSBDecode("i will kill myself 345","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        MSBDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(MSBEncode(
-//                "C:\\Users\\ramin\\Desktop\\MSB-test.png"));
+//        message = MSBEncode(
+//                "C:\\Users\\ramin\\Desktop\\MSB-test.png");
+//        writeFile(file+"message.txt",message);
 //
-//
-//        MSBAESDecode("i care you but no much 3243","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        MSBAESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(MSBAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\MSB-AES-test.png"));
+//        message =MSBAESEncode(
+//                "C:\\Users\\ramin\\Desktop\\MSB-AES-test.png");
+//        writeFile(file+"message-ASE.txt",message);
 //
-//        MSBDESDecode("i want to kill you 2 MSB 234342","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        MSBDESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//
-//        System.out.println(MSBDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\MSB-DES-test.png"));
+//        message =MSBDESEncode(
+//        "C:\\Users\\ramin\\Desktop\\MSB-DES-test.png");
+//        writeFile(file+"message-DSE.txt",message);
 
-
-//        PVDDecode("my name is dark lord","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        PVDDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(PVDEncode(
-//                "C:\\Users\\ramin\\Desktop\\PVD-test.png"));
+//        message =PVDEncode(
+//                "C:\\Users\\ramin\\Desktop\\PVD-test.png");
+//        writeFile(file+"message.txt",message);
 //
 //
-
-//        PVDAESDecode("i care you but no much ","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        PVDAESDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(PVDAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\PVD-AES-test.png"));
+//        message =PVDAESEncode(
+//                "C:\\Users\\ramin\\Desktop\\PVD-AES-test.png");
+//        writeFile(file+"message-ASE.txt",message);
 //
-//        PVDDESDecode("i want to kill you 2 PVD 11","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//
+//        PVDDESDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(PVDDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\PVD-DES-test.png"));
+//        message =PVDDESEncode("C:\\Users\\ramin\\Desktop\\PVD-DES-test.png");
+//        writeFile(file+"message-DSE.txt",message);
 
 
 
-
-//        RPEDecode("my name is dark lord 2323","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        RPEDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop",1234);
-//        System.out.println(RPEEncode(
-//                "C:\\Users\\ramin\\Desktop\\RPE-test.png",1234));
+//        message = RPEEncode(
+//                "C:\\Users\\ramin\\Desktop\\RPE-test.png",1234);
+//        writeFile(file+"message.txt",message);
 //
 //
-//
-//        RPEAESDecode("i care you but no much 999","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        RPEAESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop",1234);
-//        System.out.println(RPEAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\RPE-AES-test.png",1234));
+//        message = RPEAESEncode(
+//                "C:\\Users\\ramin\\Desktop\\RPE-AES-test.png",1234);
+//        writeFile(file+"message-AES.txt",message);
 //
-//        RPEDESDecode("i want to kill you 2 RPE 11","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        RPEDESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop",1234);
-//        System.out.println(RPEDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\RPE-DES-test.png",1234));
-
-
-//        onlyCheckDCTDOSENTHAVEERROR("C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\test.jpg");
-//        System.out.println("\n\n\nEND");
+//        message = RPEDESEncode(
+//        "C:\\Users\\ramin\\Desktop\\RPE-DES-test.png",1234);
+//        writeFile(file+"message-DES.txt",message);
 
 
 
 
-//        EBDecode("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultrices erat. Nunc non egestas ipsum, vitae sollicitudin neque. Donec nulla tellus, imperdiet in accumsan id, efficitur id lacus. Cras rutrum ligula tincidunt, aliquet nulla at, molestie mauris. Integer non bibendum neque. Donec eros justo, porttitor sit amet ante faucibus, suscipit venenatis ex. Duis blandit nunc et sem porttitor, eget porta felis dictum.\n" +
-//                        "\n" +
-//                        "Integer at ullamcorper erat, non consequat mauris. Aenean non lobortis neque, ut fermentum ante. Cras in enim auctor, hendrerit nibh sed, tincidunt augue. Fusce lobortis aliquet nibh, quis posuere sapien mattis non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus vel turpis ac arcu maximus hendrerit. Aenean quis ultricies nisi. Maecenas ut felis sagittis, pulvinar nisl id, sodales neque. Maecenas ante nisl, blandit in viverra non, tincidunt et orci. Integer libero leo, ultricies luctus magna sit amet, molestie facilisis dui.\n" +
-//                        "\n" +
-//                        "Donec lorem sapien, accumsan nec mauris ac, pellentesque facilisis neque. Etiam eros lectus, dictum sit amet sem non, hendrerit auctor dolor. Sed auctor orci vitae aliquet pellentesque. Etiam quam purus, ultrices et ultrices in, accumsan at risus. In accumsan congue sem, eu accumsan magna porta vel. Mauris in erat vitae lectus convallis gravida sed in mi. Morbi tincidunt, sapien vitae semper consequat, sem urna pretium neque, consequat placerat enim sem iaculis quam. Cras leo ante, dignissim id tempus vel, ultrices sit amet mauris. Sed sodales sapien ac neque semper eleifend. Quisque molestie, nibh ut interdum fringilla, quam neque porta nisi, quis laoreet arcu dolor sed enim. Donec accumsan tincidunt nulla in euismod. Proin aliquam tincidunt mi, eget posuere ex venenatis eget.\n" +
-//                        "\n" +
-//                        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dignissim dignissim nisl quis sollicitudin. Praesent quis venenatis ipsum. Sed egestas mauris dapibus tincidunt efficitur. Pellentesque est lectus, tempor vitae fringilla non, vestibulum non quam. Donec id orci diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut sit amet nibh sit amet dui tempor auctor id ac augue. Mauris consequat maximus efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus.\n" +
-//                        "\n" +
-//                        "Morbi luctus efficitur nulla nec auctor. Nulla volutpat finibus ligula, ut pellentesque lorem luctus vel. Vestibulum et varius lorem. Morbi ultrices gravida orci sit amet porta. Sed tristique semper tortor in convallis. Vestibulum sit amet consectetur lacus. Praesent mi risus, condimentum non odio ut, viverra eleifend arcu. Donec rhoncus tellus nibh. Duis euismod mattis justo ac cursus. Curabitur dictum, eros id facilisis fringilla, felis sapien molestie justo, in scelerisque neque lorem ac lectus. Donec sodales blandit risus, ut ornare mi. Nam facilisis augue lacus, a condimentum arcu posuere in. In fringilla tortor sit amet ullamcorper aliquet. Maecenas viverra blandit felis eget convallis." +
-//                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultrices erat. Nunc non egestas ipsum, vitae sollicitudin neque. Donec nulla tellus, imperdiet in accumsan id, efficitur id lacus. Cras rutrum ligula tincidunt, aliquet nulla at, molestie mauris. Integer non bibendum neque. Donec eros justo, porttitor sit amet ante faucibus, suscipit venenatis ex. Duis blandit nunc et sem porttitor, eget porta felis dictum.\n" +
-//                        "\n" +
-//                        "Integer at ullamcorper erat, non consequat mauris. Aenean non lobortis neque, ut fermentum ante. Cras in enim auctor, hendrerit nibh sed, tincidunt augue. Fusce lobortis aliquet nibh, quis posuere sapien mattis non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus vel turpis ac arcu maximus hendrerit. Aenean quis ultricies nisi. Maecenas ut felis sagittis, pulvinar nisl id, sodales neque. Maecenas ante nisl, blandit in viverra non, tincidunt et orci. Integer libero leo, ultricies luctus magna sit amet, molestie facilisis dui.\n" +
-//                        "\n" +
-//                        "Donec lorem sapien, accumsan nec mauris ac, pellentesque facilisis neque. Etiam eros lectus, dictum sit amet sem non, hendrerit auctor dolor. Sed auctor orci vitae aliquet pellentesque. Etiam quam purus, ultrices et ultrices in, accumsan at risus. In accumsan congue sem, eu accumsan magna porta vel. Mauris in erat vitae lectus convallis gravida sed in mi. Morbi tincidunt, sapien vitae semper consequat, sem urna pretium neque, consequat placerat enim sem iaculis quam. Cras leo ante, dignissim id tempus vel, ultrices sit amet mauris. Sed sodales sapien ac neque semper eleifend. Quisque molestie, nibh ut interdum fringilla, quam neque porta nisi, quis laoreet arcu dolor sed enim. Donec accumsan tincidunt nulla in euismod. Proin aliquam tincidunt mi, eget posuere ex venenatis eget.\n" +
-//                        "\n" +
-//                        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dignissim dignissim nisl quis sollicitudin. Praesent quis venenatis ipsum. Sed egestas mauris dapibus tincidunt efficitur. Pellentesque est lectus, tempor vitae fringilla non, vestibulum non quam. Donec id orci diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut sit amet nibh sit amet dui tempor auctor id ac augue. Mauris consequat maximus efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus.\n" +
-//                        "\n" +
-//                        "Morbi luctus efficitur nulla nec auctor. Nulla volutpat finibus ligula, ut pellentesque lorem luctus vel. Vestibulum et varius lorem. Morbi ultrices gravida orci sit amet porta. Sed tristique semper tortor in convallis. Vestibulum sit amet consectetur lacus. Praesent mi risus, condimentum non odio ut, viverra eleifend arcu. Donec rhoncus tellus nibh. Duis euismod mattis justo ac cursus. Curabitur dictum, eros id facilisis fringilla, felis sapien molestie justo, in scelerisque neque lorem ac lectus. Donec sodales blandit risus, ut ornare mi. Nam facilisis augue lacus, a condimentum arcu posuere in. In fringilla tortor sit amet ullamcorper aliquet. Maecenas viverra blandit felis eget convallis." +
-//                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultrices erat. Nunc non egestas ipsum, vitae sollicitudin neque. Donec nulla tellus, imperdiet in accumsan id, efficitur id lacus. Cras rutrum ligula tincidunt, aliquet nulla at, molestie mauris. Integer non bibendum neque. Donec eros justo, porttitor sit amet ante faucibus, suscipit venenatis ex. Duis blandit nunc et sem porttitor, eget porta felis dictum.\n" +
-//                        "\n" +
-//                        "Integer at ullamcorper erat, non consequat mauris. Aenean non lobortis neque, ut fermentum ante. Cras in enim auctor, hendrerit nibh sed, tincidunt augue. Fusce lobortis aliquet nibh, quis posuere sapien mattis non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus vel turpis ac arcu maximus hendrerit. Aenean quis ultricies nisi. Maecenas ut felis sagittis, pulvinar nisl id, sodales neque. Maecenas ante nisl, blandit in viverra non, tincidunt et orci. Integer libero leo, ultricies luctus magna sit amet, molestie facilisis dui.\n" +
-//                        "\n" +
-//                        "Donec lorem sapien, accumsan nec mauris ac, pellentesque facilisis neque. Etiam eros lectus, dictum sit amet sem non, hendrerit auctor dolor. Sed auctor orci vitae aliquet pellentesque. Etiam quam purus, ultrices et ultrices in, accumsan at risus. In accumsan congue sem, eu accumsan magna porta vel. Mauris in erat vitae lectus convallis gravida sed in mi. Morbi tincidunt, sapien vitae semper consequat, sem urna pretium neque, consequat placerat enim sem iaculis quam. Cras leo ante, dignissim id tempus vel, ultrices sit amet mauris. Sed sodales sapien ac neque semper eleifend. Quisque molestie, nibh ut interdum fringilla, quam neque porta nisi, quis laoreet arcu dolor sed enim. Donec accumsan tincidunt nulla in euismod. Proin aliquam tincidunt mi, eget posuere ex venenatis eget.\n" +
-//                        "\n" +
-//                        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dignissim dignissim nisl quis sollicitudin. Praesent quis venenatis ipsum. Sed egestas mauris dapibus tincidunt efficitur. Pellentesque est lectus, tempor vitae fringilla non, vestibulum non quam. Donec id orci diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut sit amet nibh sit amet dui tempor auctor id ac augue. Mauris consequat maximus efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus.\n" +
-//                        "\n" +
-//                        "Morbi luctus efficitur nulla nec auctor. Nulla volutpat finibus ligula, ut pellentesque lorem luctus vel. Vestibulum et varius lorem. Morbi ultrices gravida orci sit amet porta. Sed tristique semper tortor in convallis. Vestibulum sit amet consectetur lacus. Praesent mi risus, condimentum non odio ut, viverra eleifend arcu. Donec rhoncus tellus nibh. Duis euismod mattis justo ac cursus. Curabitur dictum, eros id facilisis fringilla, felis sapien molestie justo, in scelerisque neque lorem ac lectus. Donec sodales blandit risus, ut ornare mi. Nam facilisis augue lacus, a condimentum arcu posuere in. In fringilla tortor sit amet ullamcorper aliquet. Maecenas viverra blandit felis eget convallis." +
-//                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultrices erat. Nunc non egestas ipsum, vitae sollicitudin neque. Donec nulla tellus, imperdiet in accumsan id, efficitur id lacus. Cras rutrum ligula tincidunt, aliquet nulla at, molestie mauris. Integer non bibendum neque. Donec eros justo, porttitor sit amet ante faucibus, suscipit venenatis ex. Duis blandit nunc et sem porttitor, eget porta felis dictum.\n" +
-//                        "\n" +
-//                        "Integer at ullamcorper erat, non consequat mauris. Aenean non lobortis neque, ut fermentum ante. Cras in enim auctor, hendrerit nibh sed, tincidunt augue. Fusce lobortis aliquet nibh, quis posuere sapien mattis non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus vel turpis ac arcu maximus hendrerit. Aenean quis ultricies nisi. Maecenas ut felis sagittis, pulvinar nisl id, sodales neque. Maecenas ante nisl, blandit in viverra non, tincidunt et orci. Integer libero leo, ultricies luctus magna sit amet, molestie facilisis dui.\n" +
-//                        "\n" +
-//                        "Donec lorem sapien, accumsan nec mauris ac, pellentesque facilisis neque. Etiam eros lectus, dictum sit amet sem non, hendrerit auctor dolor. Sed auctor orci vitae aliquet pellentesque. Etiam quam purus, ultrices et ultrices in, accumsan at risus. In accumsan congue sem, eu accumsan magna porta vel. Mauris in erat vitae lectus convallis gravida sed in mi. Morbi tincidunt, sapien vitae semper consequat, sem urna pretium neque, consequat placerat enim sem iaculis quam. Cras leo ante, dignissim id tempus vel, ultrices sit amet mauris. Sed sodales sapien ac neque semper eleifend. Quisque molestie, nibh ut interdum fringilla, quam neque porta nisi, quis laoreet arcu dolor sed enim. Donec accumsan tincidunt nulla in euismod. Proin aliquam tincidunt mi, eget posuere ex venenatis eget.\n" +
-//                        "\n" +
-//                        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dignissim dignissim nisl quis sollicitudin. Praesent quis venenatis ipsum. Sed egestas mauris dapibus tincidunt efficitur. Pellentesque est lectus, tempor vitae fringilla non, vestibulum non quam. Donec id orci diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut sit amet nibh sit amet dui tempor auctor id ac augue. Mauris consequat maximus efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus.\n" +
-//                        "\n" +
-//                        "Morbi luctus efficitur nulla nec auctor. Nulla volutpat finibus ligula, ut pellentesque lorem luctus vel. Vestibulum et varius lorem. Morbi ultrices gravida orci sit amet porta. Sed tristique semper tortor in convallis. Vestibulum sit amet consectetur lacus. Praesent mi risus, condimentum non odio ut, viverra eleifend arcu. Donec rhoncus tellus nibh. Duis euismod mattis justo ac cursus. Curabitur dictum, eros id facilisis fringilla, felis sapien molestie justo, in scelerisque neque lorem ac lectus. Donec sodales blandit risus, ut ornare mi. Nam facilisis augue lacus, a condimentum arcu posuere in. In fringilla tortor sit amet ullamcorper aliquet. Maecenas viverra blandit felis eget convallis." +
-//                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec ultrices erat. Nunc non egestas ipsum, vitae sollicitudin neque. Donec nulla tellus, imperdiet in accumsan id, efficitur id lacus. Cras rutrum ligula tincidunt, aliquet nulla at, molestie mauris. Integer non bibendum neque. Donec eros justo, porttitor sit amet ante faucibus, suscipit venenatis ex. Duis blandit nunc et sem porttitor, eget porta felis dictum.\n" +
-//                        "\n" +"fuck 23","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+
+//        EBDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(EBEncode(
-//                "C:\\Users\\ramin\\Desktop\\EB-test.png"));
-
-//        EBAESDecode("i care you but no much 992131239","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(EBAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\EB-AES-test.png"));
-//
-//        EBDESDecode("i want to kill you 2 eb 13253251","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(EBDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\EB-DES-test.png"));
-
-
-//    BPCSDecode("i am king of all dragon dragon night","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(BPCSEncode(
-//                "C:\\Users\\ramin\\Desktop\\BPCS-test.png"));
-//        BPCSAESDecode("i care you but no much 222222","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(BPCSAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\BPCS-AES-test.png"));
-//
-//        BPCSDESDecode("i want to kill you 2 BPCS 11111","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(BPCSDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\BPCS-DES-test.png"));
+//        message = EBEncode(
+//                "C:\\Users\\ramin\\Desktop\\EB-test.png");
+//        writeFile(file+"message.txt",message);
 //
 //
-//    HSDecode("king of king ruler of woods an something i dont know .... spam it ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//        EBAESDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(HSEncode(
-//                "C:\\Users\\ramin\\Desktop\\HS-test.png"));
+//        message = EBAESEncode(
+//                "C:\\Users\\ramin\\Desktop\\EB-AES-test.png");
+//        writeFile(file+"message-AES.txt",message);
 //
-//        HSAESDecode("i care you but no much 565656","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
+//
+//        EBDESDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
 //                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(HSAESEncode(
-//                "C:\\Users\\ramin\\Desktop\\HS-AES-test.png"));
-//
-//        HSDESDecode("i want to kill you 2 HS 11111","C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-//                "C:\\Users\\ramin\\Desktop");
-//        System.out.println(HSDESEncode(
-//        "C:\\Users\\ramin\\Desktop\\HS-DES-test.png"));
-//
-        String file = "C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\";
+//        message = EBDESEncode(
+//        "C:\\Users\\ramin\\Desktop\\EB-DES-test.png");
+//        writeFile(file+"message-DES.txt",message);
 
 
-        checkUTF8(file+"file.txt",file+"result2.txt",
-                "C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\dog.jpg",
-                "C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY");
+//    BPCSDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
+//                "C:\\Users\\ramin\\Desktop");
+//        message = BPCSEncode(
+//                "C:\\Users\\ramin\\Desktop\\BPCS-test.png");
+//        writeFile(file+"message.txt",message);
+//
+//        BPCSAESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
+//                "C:\\Users\\ramin\\Desktop");
+//        message = BPCSAESEncode(
+//                "C:\\Users\\ramin\\Desktop\\BPCS-AES-test.png");
+//        writeFile(file+"message-AES.txt",message);
+//
+//        BPCSDESDecode(secretText,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
+//                "C:\\Users\\ramin\\Desktop");
+//        message = BPCSDESEncode(
+//        "C:\\Users\\ramin\\Desktop\\BPCS-DES-test.png");
+//        writeFile(file+"message-DES.txt",message);
+
+        HSDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
+                "C:\\Users\\ramin\\Desktop");
+        System.out.println("three");
+        message = HSEncode(
+                "C:\\Users\\ramin\\Desktop\\HS-test.png");
+        writeFile(file+"message.txt",message);
+        System.out.println("here");
+
+        HSAESDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
+                "C:\\Users\\ramin\\Desktop");
+        System.out.println("three");
+        message = HSAESEncode(
+                "C:\\Users\\ramin\\Desktop\\HS-AES-test.png");
+        writeFile(file+"message-AES.txt",message);
+        System.out.println("here");
+
+        HSDESDecode(secretText2,"C:\\Users\\ramin\\Desktop\\IMAGE STEGANOGRAPHY\\bird.jpg",
+                "C:\\Users\\ramin\\Desktop");
+        System.out.println("three");
+        message = HSDESEncode("C:\\Users\\ramin\\Desktop\\HS-DES-test.png");
+        writeFile(file+"message-DES.txt",message);
+        System.out.println("here");
+
+
+
     }
 
     private static void checkUTF8(String readFile,String writeFile, String location,String writeLocation) throws Exception {
